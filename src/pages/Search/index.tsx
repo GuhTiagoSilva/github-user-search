@@ -29,6 +29,7 @@ const Search = () => {
             </div>
             <Button text="Encontrar" onClick={handleOnClick} />
         </div>
+
     );
 };
 
