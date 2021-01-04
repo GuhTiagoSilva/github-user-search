@@ -1,14 +1,14 @@
 import React from 'react';
 import './styles.scss';
 
-
 type Props = {
     text: string;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Button = ({ text }: Props) => {
+const Button = ({ text, onClick }: Props) => {
     return (
-        <button className="btn btn-primary button-start">
+        <button className="btn btn-primary button-start" onClick={onClick}>
             {text}
         </button>
     );
