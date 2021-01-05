@@ -14,7 +14,6 @@ const Routes = () => {
                 </Route>
                 <Route path="/search" >
                     <Search />
-                    <Profile/>
                 </Route>
             </Switch>
         </BrowserRouter>
