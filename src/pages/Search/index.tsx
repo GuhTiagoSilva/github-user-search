@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import Button from '../../core/components/Button';
+import { GitHubProfile } from '../../core/types/GitHubProfile';
 import { makeRequest } from '../../core/utils/request';
 import InfoLoader from './Loaders/InfoLoader';
 import Profile from './Profile';
@@ -8,38 +10,44 @@ import './styles.scss';
 
 const Search = () => {
 
-    const [user, setUser] = useState('');
+    const [userName, setUserName] = useState('');
+    const [profile, setProfile] = useState<GitHubProfile>();
     const [isLoading, setIsLoading] = useState(false);
 
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUser(event.target.value);
+        setUserName(event.target.value);
     }
 
     const handleOnClick = () => {
         setIsLoading(true);
-        makeRequest({ method: 'GET', url: `/${user}` }).then(response => {
-            console.log(response.data);
-        }).finally(()=>{
+        makeRequest({ method: 'GET', url: `/${userName}` }).then(response => {
+            setProfile(response.data);
+        }).finally(() => {
             setIsLoading(false);
         });
     }
 
     return (
         <>
-            <div className="search-profile-container container">
-                <div className="row find-user-container">
+            <div className="search-profile-container">
+                <div className=" row find-user-container">
                     <div className="col-8">
                         <h1>Encontre um perfil Github</h1>
-                        <input type="text" value={user} className="form-control find-user" placeholder="Usuário Github"
+                        <input type="text" value={userName} className="form-control find-user" placeholder="Usuário Github"
                             onChange={handleOnChange} />
                     </div>
                 </div>
                 <Button text="Encontrar" onClick={handleOnClick} />
             </div>
 
-            {
-                isLoading ? <InfoLoader /> : <Profile />
-            }
+            <div className="container mt-5">
+                {
+                    isLoading ? <InfoLoader /> : profile && <Profile profile={profile} />
+                }
+            </div>
+
+
+
         </>
 
     );

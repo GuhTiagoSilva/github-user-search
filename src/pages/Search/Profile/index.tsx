@@ -1,36 +1,44 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../../core/components/Button';
+import { GitHubProfile } from '../../../core/types/GitHubProfile';
 import './styles.scss';
 
-const Profile = () => {
+type ProfileProps = {
+    profile: GitHubProfile
+};
+
+const Profile = ({ profile }: ProfileProps) => {
     return (
 
-        <div className="profile-container container">
+        <div className="profile-container">
 
             <div className="profile-image">
-                <img src="https://github.githubassets.com/images/modules/about/leadership-nat.jpg" className="profile-image" alt="" />
-                <Button text="Ver perfil" />
+                <img src={profile.avatar_url} className="profile-image" alt="" />
+                <a href={`https://github.com/${profile.login}`} target='blank'>
+                    <Button text="Ver perfil" />
+                </a>
+
+
+
             </div>
 
             <div className="profile-repository-informations">
                 <ul className="repositories">
-                    <li>Repositórios públicos: 62</li>
-                    <li>Seguidores: 127</li>
-                    <li>Seguindo: 416</li>
+                    <li>{`Repositórios públicos: ${profile.public_repos}`} </li>
+                    <li> {`Seguidores: ${profile.followers}`} </li>
+                    <li>  {`Seguindo: ${profile.following}`}  </li>
                 </ul>
 
                 <div className="profile-information-container">
                     <h3 className="profile-information-title">Informações</h3>
-                    <input type="text" className="form-control profile-input" />
-                    <input type="text" className="form-control profile-input" />
-                    <input type="text" className="form-control profile-input" />
-                    <input type="text" className="form-control profile-input" />
+                    <input readOnly type="text" className="form-control profile-input" value={`Empresa: ${profile.company}  `}></input>
+                    <input readOnly type="text" className="form-control profile-input" value={`Website/Blog: ${profile.blog} `} />
+                    <input readOnly type="text" className="form-control profile-input" value={`Localidade: ${profile.location} `} />
+                    <input readOnly type="text" className="form-control profile-input" value={`Membro desde: ${profile.created_at} `} />
                 </div>
 
             </div>
-
-
-
         </div>
 
     );
