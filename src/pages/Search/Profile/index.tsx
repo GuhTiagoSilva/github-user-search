@@ -11,16 +11,13 @@ type ProfileProps = {
 const Profile = ({ profile }: ProfileProps) => {
     return (
 
-        <div className="profile-container">
+        <div className="profile-container container">
 
             <div className="profile-image">
                 <img src={profile.avatar_url} className="profile-image" alt="" />
                 <a href={`https://github.com/${profile.login}`} target='blank'>
                     <Button text="Ver perfil" />
                 </a>
-
-
-
             </div>
 
             <div className="profile-repository-informations">

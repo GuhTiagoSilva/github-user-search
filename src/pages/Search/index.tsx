@@ -29,7 +29,7 @@ const Search = () => {
 
     return (
         <>
-            <div className="search-profile-container">
+            <div className="search-profile-container container">
                 <div className=" row find-user-container">
                     <div className="col-8">
                         <h1>Encontre um perfil Github</h1>
@@ -39,15 +39,11 @@ const Search = () => {
                 </div>
                 <Button text="Encontrar" onClick={handleOnClick} />
             </div>
-
-            <div className="container mt-5">
+            <div className="loader-content">
                 {
                     isLoading ? <InfoLoader /> : profile && <Profile profile={profile} />
                 }
             </div>
-
-
-
         </>
 
     );
